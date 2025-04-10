@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khatak</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sidhufy👳🏾‍♂️</h1>
+        <p class="subtitle">Convert your sentences to Navjot Singh Sidhu's commentary style</p>
+        
+        <div class="input-container">
+            <textarea id="input-text" placeholder="Enter your text here... (max 100 characters)" maxlength="100"></textarea>
+            <div class="char-counter">
+                <span id="char-count">0</span>/100 characters
+            </div>
+            <button id="convert-btn">Sidhufy!</button>
+        </div>
+        
+        <div class="result-container">
+            <h2>Result:</h2>
+            <div id="result" class="result-box"></div>
+        </div>
+    </div>
+
+    <script>
+        const textarea = document.getElementById('input-text');
+        const charCount = document.getElementById('char-count');
+        const convertBtn = document.getElementById('convert-btn');
+        const resultDiv = document.getElementById('result');
+
+        // Update character count
+        textarea.addEventListener('input', () => {
+            const count = textarea.value.length;
+            charCount.textContent = count;
+            charCount.style.color = count > 100 ? '#ff4444' : 'var(--text-secondary)';
+        });
+
+        // Sanitize input
+        function sanitizeInput(text) {
+            return text
+                .replace(/[<>]/g, '') // Remove < and > to prevent HTML injection
+                .trim() // Remove leading/trailing whitespace
+                .slice(0, 100); // Ensure max length
+        }
+
+        convertBtn.addEventListener('click', async () => {
+            const inputText = sanitizeInput(textarea.value);
+            
+            if (!inputText) {
+                resultDiv.textContent = 'Please enter some text to convert';
+                return;
+            }
+
+            try {
+                resultDiv.textContent = 'Converting...';
+                resultDiv.classList.add('loading');
+                
+                const response = await fetch('/sidhufy', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: inputText })
+                });
+
+                const data = await response.json();
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                resultDiv.textContent = data.result;
+            } catch (error) {
+                resultDiv.textContent = 'Error: ' + error.message;
+            } finally {
+                resultDiv.classList.remove('loading');
+            }
+        });
+    </script>
+</body>
+</html> 
