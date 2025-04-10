@@ -9,12 +9,12 @@
 <body>
     <div class="container">
         <h1>Sidhufy👳🏾‍♂️</h1>
-        <p class="subtitle">Convert your sentences to Navjot Singh Sidhu's commentary style</p>
+        <p class="subtitle">Convert your tweets to Navjot Singh Sidhu's commentary style</p>
         
         <div class="input-container">
-            <textarea id="input-text" placeholder="Enter your text here... (max 100 characters)" maxlength="100"></textarea>
+            <textarea id="input-text" placeholder="Enter your text here... (max 280 characters)" maxlength="280"></textarea>
             <div class="char-counter">
-                <span id="char-count">0</span>/100 characters
+                <span id="char-count">0</span>/280 characters
             </div>
             <button id="convert-btn">Sidhufy!</button>
         </div>
@@ -23,6 +23,10 @@
             <h2>Result:</h2>
             <div id="result" class="result-box"></div>
         </div>
+
+        <footer>
+            <p>Made with vibes by <a href="https://x.com/pyaaraacetamol" target="_blank" rel="noopener noreferrer">Tushar Amrit</a></p>
+        </footer>
     </div>
 
     <script>
@@ -43,7 +47,7 @@
             return text
                 .replace(/[<>]/g, '') // Remove < and > to prevent HTML injection
                 .trim() // Remove leading/trailing whitespace
-                .slice(0, 100); // Ensure max length
+                .slice(0, 280); // Ensure max length
         }
 
         convertBtn.addEventListener('click', async () => {

@@ -16,6 +16,7 @@
     --input-bg: #40414f;
     --result-bg: #444654;
     --error-color: #ff4444;
+    --link-color: #10a37f;
 }
 
 body {
@@ -36,6 +37,8 @@ body {
     width: 100%;
     max-width: 800px;
     border: 1px solid var(--border-color);
+    position: relative;
+    min-height: 80vh;
 }
 
 h1 {
@@ -133,6 +136,29 @@ h2 {
     color: var(--text-primary);
 }
 
+/* Footer styles */
+footer {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    padding: 0 2.5rem;
+}
+
+footer a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
 /* Loading animation */
 @keyframes pulse {
     0% { opacity: 0.6; }
@@ -148,6 +174,7 @@ h2 {
 @media (max-width: 768px) {
     .container {
         padding: 1.5rem;
+        min-height: 90vh;
     }
     
     h1 {
@@ -157,5 +184,9 @@ h2 {
     button {
         width: 100%;
         padding: 0.8rem;
+    }
+
+    footer {
+        padding: 0 1.5rem;
     }
 } 
