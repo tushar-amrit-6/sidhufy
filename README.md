@@ -1,4 +1,4 @@
-# Sidhufy
+# [Sidhufy](https://sidhufy.onrender.com/)
 
 A vibe coded web application that converts your text into Navjot Singh Sidhu's unique style of speaking using Google's Gemini API.
 
